@@ -1,9 +1,9 @@
-import argparse
 import math
 import matplotlib.pyplot as plt
 from qiskit import QuantumCircuit, transpile
 from qiskit_aer import AerSimulator
-def run_die_simulation(sides, rolls):
+import os
+def run_quantum_die(sides, rolls):
     print(f"Running {sides}-sided die simulation for {rolls} rolls...")
     
     num_qubits = math.ceil(math.log2(sides))
@@ -12,9 +12,11 @@ def run_die_simulation(sides, rolls):
         qc.h(i)
     qc.measure(range(num_qubits), range(num_qubits))
     
+    os.makedirs("outputs/circuits", exist_ok=True)
+    os.makedirs("outputs/plots", exist_ok=True)
     # Save circuit visually
-    qc.draw(output='mpl', filename='circuit.png')
-    print("Saved circuit diagram to circuit.png")
+    qc.draw(output='mpl', filename='outputs/circuits/quantum_die_circuit.png')
+    print("Saved circuit diagram to outputs/circuits/quantum_die_circuit.png")
     
     backend = AerSimulator()
     qc_transpiled = transpile(qc, backend)
@@ -59,5 +61,6 @@ def run_die_simulation(sides, rolls):
     plt.xlabel('Face')
     plt.ylabel('Frequency')
     plt.xticks(labels)
-    plt.savefig('dice_results.png')
-    print("Saved plot to dice_results.png")
+    plt.savefig('outputs/plots/quantum_die_result.png')
+    plt.close()
+    print("Saved plot to outputs/plots/quantum_die_result.png")

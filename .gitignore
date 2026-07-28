@@ -1,6 +1,5 @@
 __pycache__/
 *.pyc
 .vscode/
-outputs/
 .DS_Store
 .env

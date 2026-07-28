@@ -1,0 +1,6 @@
+qiskit
+qiskit-aer
+matplotlib
+numpy
+pylatexenc
+#python3 -m pip install -r requirements.txt
